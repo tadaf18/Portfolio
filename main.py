@@ -1,5 +1,22 @@
 import streamlit as st
 import importlib
+import requests
+from io import BytesIO
+from PIL import Image, ImageDraw
+
+# Função para arredondar a imagem
+def make_rounded(image):
+    image = image.convert("RGBA")
+    mask = Image.new('L', image.size, 0)
+    draw = ImageDraw.Draw(mask)
+    width, height = image.size
+    radius = min(width, height) // 2
+    center = (width // 2, height // 2)
+    draw.ellipse([center[0] - radius, center[1] - radius, center[0] + radius, center[1] + radius], fill=255)
+    mask = mask.convert("L")
+    rounded_image = Image.new("RGBA", image.size)
+    rounded_image.paste(image, (0, 0), mask=mask)
+    return rounded_image
 
 # Função para mostrar o conteúdo
 # Para rodar no terminal: python -m streamlit run main.py
@@ -31,9 +48,20 @@ page = st.sidebar.selectbox(
     ['Início', 'Projetos', 'Dashboards', 'Contato']
 )
 
-# criando um resumo
+# Exibe o conteúdo da página selecionada ou a página inicial
+if page == "Início":
+    # Carrega a imagem e aplica a função para torná-la arredondada
+    url = 'https://media.licdn.com/dms/image/v2/D4D03AQEI5LWxkyG7YQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1731789177315?e=1763596800&v=beta&t=O2JBLPJ30d0qX45ST4dZ-eonWs85Q25y2ENX3HmMn7g'
+    response = requests.get(url)
+    image = Image.open(BytesIO(response.content))
 
-if page == 'Início':
+    # Arredondar a imagem
+    rounded_image = make_rounded(image)
+
+    # Exibe a imagem arredondada
+    st.image(rounded_image, caption="Tarcísio Alves", use_column_width=False, width=150)
+
+# criando um resumo
 
     st.title("Portfólio de Ciência de Dados")
     st.write("""
