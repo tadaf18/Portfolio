@@ -41,6 +41,7 @@ st.markdown("""
             margin-top: 15px;
         }
 
+        /* O seu estilo .stButton > button já funcionará com st.button */
         .stButton > button {
             background-color: #0A66C2;
             color: white;
@@ -50,6 +51,7 @@ st.markdown("""
             font-size: 1em;
             font-weight: 500;
             transition: all 0.3s ease-in-out;
+            width: 100%; /* Adicionado para os botões terem o mesmo tamanho */
         }
 
         .stButton > button:hover {
@@ -91,33 +93,57 @@ def show_pages(page_name):
 
     module_name = modules.get(page_name)
     if module_name:
-        module = importlib.import_module(module_name)
-        if hasattr(module, 'run'):
-            module.run()
-        else:
-            st.warning("O módulo selecionado não possui uma função 'run'.")
+        # Tenta importar o módulo
+        try:
+            module = importlib.import_module(module_name)
+            
+            # Recarrega o módulo para garantir que mudanças sejam vistas
+            # (útil durante o desenvolvimento)
+            importlib.reload(module) 
+            
+            if hasattr(module, 'run'):
+                module.run()
+            else:
+                st.warning(f"O módulo '{module_name}.py' não possui uma função 'run'.")
+        except ImportError:
+            st.error(f"Erro: Não foi possível encontrar o arquivo '{module_name}.py'.")
     else:
         st.error("Página não encontrada.")
 
 # ===============================
 # SIDEBAR - MENU DE NAVEGAÇÃO
 # ===============================
+
+# 1. Inicializa o st.session_state para guardar a página atual
+if 'page' not in st.session_state:
+    st.session_state.page = 'Início'
+
 st.sidebar.image(
     "https://tse3.mm.bing.net/th/id/OIP.i_cBUKNXRQab9LDeJkjrMQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
     width=70
 )
 st.sidebar.title("Navegação")
 
-page = st.sidebar.radio(
-    "",
+# 2. O st.radio agora usa 'key="page"' para ler e escrever no session_state
+st.sidebar.radio(
+    "Navegação", # O label é necessário, mas será escondido
     ['Início', 'Projetos', 'Dashboards', 'Contato'],
-    index=0
+    key='page', # Esta é a "variável" no session_state
+    label_visibility='collapsed' # Esconde o label "Navegação"
 )
 
 # ===============================
-# PÁGINA INICIAL
+# FUNÇÃO PARA MUDAR DE PÁGINA (USADA PELOS BOTÕES)
 # ===============================
-if page == "Início":
+def change_page(page_name):
+    st.session_state.page = page_name
+
+# ===============================
+# RENDERIZAÇÃO DAS PÁGINAS
+# ===============================
+
+# 3. A lógica principal agora lê a página do st.session_state
+if st.session_state.page == "Início":
     # Carrega imagem do perfil
     url = 'https://media.licdn.com/dms/image/v2/D4D03AQEI5LWxkyG7YQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1731789177315?e=1763596800&v=beta&t=O2JBLPJ30d0qX45ST4dZ-eonWs85Q25y2ENX3HmMn7g'
     response = requests.get(url)
@@ -147,14 +173,15 @@ if page == "Início":
 
     st.write("---")
 
-    # Botões de ação
+    # 4. Botões de ação MODIFICADOS
+    # Agora usam st.button e a função on_click para mudar o st.session_state.page
     col_a, col_b, col_c = st.columns(3)
     with col_a:
-        st.link_button("💼 Ver Projetos", "#Projetos")
+        st.button("💼 Ver Projetos", on_click=change_page, args=['Projetos'])
     with col_b:
-        st.link_button("📊 Dashboards", "#Dashboards")
+        st.button("📊 Dashboards", on_click=change_page, args=['Dashboards'])
     with col_c:
-        st.link_button("📬 Contato", "#Contato")
+        st.button("📬 Contato", on_click=change_page, args=['Contato'])
 
     # ===============================
     # CURRÍCULO - BOTÃO PARA DOWNLOAD LOCAL
@@ -175,4 +202,5 @@ if page == "Início":
         st.warning("⚠️ O arquivo 'curriculo.pdf' não foi encontrado na pasta do projeto.")
 
 else:
-    show_pages(page)
+    # 5. Renderiza as outras páginas lendo o valor do session_state
+    show_pages(st.session_state.page)
