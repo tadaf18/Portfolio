@@ -11,15 +11,15 @@ def run():
 
     # --- Projeto 1 ---
     with col1:
-        st.markdown("### Predição de Vendas com Regressão Linear")
-        st.write("Análise de empresas Unicórnios e criação de modelo de Regressão Linear para prever vendas.")
+        st.markdown("### Análise de dados de empresas 'Unicórnios'")
+        st.write("Análise de região, setores e valuation.")
         st.link_button("Ver Projeto", "https://github.com/tadaf18/case-unicornios")
 
     # --- Projeto 2 (Exemplo) ---
     with col2:
-        st.markdown("### Título do Projeto 2")
-        st.write("Breve descrição do seu segundo projeto aqui.")
-        st.link_button("Ver Projeto", "#") # Lembre-se de trocar o '#' pelo link do GitHub
+        st.markdown("### Análise do conjunto de dados de notas obtidas pelos alunos em várias disciplinas.")
+        st.write("Vamos tentar entender a influência dos antecedentes dos pais, preparação para testes etc. no desempenho dos alunos.")
+        st.link_button("Ver Projeto", "https://github.com/tadaf18/Portfolio/blob/main/Projeto_Estudantes.ipynb") # Lembre-se de trocar o '#' pelo link do GitHub
 
     # Você pode adicionar mais colunas ou linhas para mais projetos
     # st.write("---")
