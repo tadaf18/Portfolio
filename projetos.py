@@ -1,8 +1,7 @@
 import streamlit as st
 
 def run():
-    # CSS para as tags de habilidade e para o "card" do projeto
-    # (Removi o CSS das imagens)
+    # CSS apenas para as tags de habilidade
     st.markdown("""
     <style>
     .project-tag {
@@ -17,17 +16,9 @@ def run():
         margin-right: 0.3em;
         margin-bottom: 0.3em;
     }
-    .project-container {
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 1.5em;
-        transition: all 0.3s ease-in-out;
-        height: 100%; /* Garante que as colunas tenham a mesma altura */
-    }
-    .project-container:hover {
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        border-color: #0A66C2;
-    }
+    
+    /* Removemos o .project-container e :hover, não são mais necessários */
+    
     </style>
     """, unsafe_allow_html=True)
 
@@ -39,8 +30,9 @@ def run():
 
     # --- Projeto 1: Unicórnios ---
     with col1:
-        with st.container(border=False):
-            st.markdown('<div class="project-container">', unsafe_allow_html=True)
+        # MUDANÇA 1: Usamos o container nativo com borda
+        with st.container(border=True):
+            # MUDANÇA 2: REMOVEMOS a linha st.markdown('<div class="project-container">')
             
             # 1. Título (Mais chamativo, com emoji)
             st.markdown("### 🦄 Decifrando os Unicórnios")
@@ -71,13 +63,14 @@ def run():
                 - **Insights:** A análise revelou que 'Fintech' e 'E-commerce' são os setores dominantes. Os EUA e a China concentram a grande maioria dos unicórnios, mas investidores como 'Sequoia Capital' e 'Tiger Global Management' têm um portfólio global diversificado.
                 """)
             
-            st.markdown('</div>', unsafe_allow_html=True) # Fecha o container
+            # MUDANÇA 3: REMOVEMOS a linha st.markdown('</div>')
 
 
     # --- Projeto 2: Desempenho de Alunos ---
     with col2:
-        with st.container(border=False):
-            st.markdown('<div class="project-container">', unsafe_allow_html=True)
+        # MUDANÇA 1: Usamos o container nativo com borda
+        with st.container(border=True):
+            # MUDANÇA 2: REMOVEMOS a linha st.markdown('<div class="project-container">')
             
             # 1. Título (Mais chamativo, com emoji)
             st.markdown("### 🎓 Fatores de Sucesso Acadêmico")
@@ -108,7 +101,7 @@ def run():
                 - **Insights:** O modelo de regressão mostrou que "concluir o curso de preparação para o teste" e "status de alimentação" foram os preditores mais significativos, tendo um impacto maior no desempenho do que o nível educacional dos pais.
                 """)
             
-            st.markdown('</div>', unsafe_allow_html=True) # Fecha o container
+            # MUDANÇA 3: REMOVEMOS a linha st.markdown('</div>')
 
 # Esta parte é para testar o arquivo isoladamente
 if __name__ == "__main__":
