@@ -1,5 +1,12 @@
 import streamlit as st
 
+# ===============================
+# FUNÇÃO DE AJUDA PARA NAVEGAÇÃO
+# ===============================
+# Esta função altera o valor no session_state
+def change_page_local(page_name):
+    st.session_state.page = page_name
+
 def run():
     # CSS apenas para as tags de habilidade
     st.markdown("""
@@ -17,8 +24,6 @@ def run():
         margin-bottom: 0.3em;
     }
     
-    /* Removemos o .project-container e :hover, não são mais necessários */
-    
     </style>
     """, unsafe_allow_html=True)
 
@@ -30,17 +35,9 @@ def run():
 
     # --- Projeto 1: Unicórnios ---
     with col1:
-        # MUDANÇA 1: Usamos o container nativo com borda
         with st.container(border=True):
-            # MUDANÇA 2: REMOVEMOS a linha st.markdown('<div class="project-container">')
-            
-            # 1. Título (Mais chamativo, com emoji)
             st.markdown("### 🦄 Decifrando os Unicórnios")
-            
-            # 2. Descrição Curta (Focada no objetivo)
             st.write("Análise exploratória (EDA) para identificar os **fatores-chave** (setor, país, investidores) por trás dos *valuations* bilionários.")
-
-            # 3. Tags de Ferramentas (Palavras-chave)
             st.markdown(
                 '<span class="project-tag">Python</span>'
                 '<span class="project-tag">Pandas</span>'
@@ -49,36 +46,21 @@ def run():
                 '<span class="project-tag">Kaggle Dataset</span>',
                 unsafe_allow_html=True
             )
-            
             st.write("") # Espaçamento
-
-            # 4. Botão de Ação
             st.link_button("Ver Projeto no GitHub", "https://github.com/tadaf18/case-unicornios")
 
-            # 5. O Storytelling (dentro do expander)
             with st.expander("Ver detalhes da análise"):
                 st.markdown("""
                 - **Problema:** O que faz uma startup atingir o status de "Unicórnio"? Quais são os fatores comuns (setor, país, investidores) por trás dessas empresas de rápido crescimento?
                 - **Método:** Utilizei Pandas para limpeza e transformação dos dados. Realizei uma Análise Exploratória de Dados (EDA) e criei visualizações com Seaborn e Matplotlib para identificar tendências, mapear geograficamente os unicórnios e analisar os *valuations* por setor.
                 - **Insights:** A análise revelou que 'Fintech' e 'E-commerce' são os setores dominantes. Os EUA e a China concentram a grande maioria dos unicórnios, mas investidores como 'Sequoia Capital' e 'Tiger Global Management' têm um portfólio global diversificado.
                 """)
-            
-            # MUDANÇA 3: REMOVEMOS a linha st.markdown('</div>')
-
 
     # --- Projeto 2: Desempenho de Alunos ---
     with col2:
-        # MUDANÇA 1: Usamos o container nativo com borda
         with st.container(border=True):
-            # MUDANÇA 2: REMOVEMOS a linha st.markdown('<div class="project-container">')
-            
-            # 1. Título (Mais chamativo, com emoji)
             st.markdown("### 🎓 Fatores de Sucesso Acadêmico")
-            
-            # 2. Descrição Curta (Focada no método e objetivo)
             st.write("Investigação com **Regressão Linear** para medir como fatores socioeconômicos (alimentação, pais) impactam as notas dos alunos.")
-
-            # 3. Tags de Ferramentas (Palavras-chave)
             st.markdown(
                 '<span class="project-tag">Python</span>'
                 '<span class="project-tag">Regressão Linear</span>'
@@ -87,21 +69,49 @@ def run():
                 '<span class="project-tag">NumPy</span>',
                 unsafe_allow_html=True
             )
-
             st.write("") # Espaçamento
-
-            # 4. Botão de Ação
             st.link_button("Ver Projeto no GitHub", "https://github.com/tadaf18/Portfolio/blob/main/Projeto_Estudantes.ipynb")
 
-            # 5. O Storytelling (dentro do expander)
             with st.expander("Ver detalhes da análise"):
                 st.markdown("""
                 - **Problema:** Quais fatores têm o maior impacto no desempenho acadêmico dos alunos? A preparação pré-teste é mais influente que o nível educacional dos pais?
                 - **Método:** Apliquei testes de hipótese (Teste-T) para comparar grupos. Construí um modelo de **Regressão Linear Múltipla** com Scikit-learn para identificar quais variáveis melhor predizem a nota final de matemática.
                 - **Insights:** O modelo de regressão mostrou que "concluir o curso de preparação para o teste" e "status de alimentação" foram os preditores mais significativos, tendo um impacto maior no desempenho do que o nível educacional dos pais.
                 """)
-            
-            # MUDANÇA 3: REMOVEMOS a linha st.markdown('</div>')
+    
+    # ===============================
+    # BOTÕES DE NAVEGAÇÃO DE PÁGINA (NOVO)
+    # ===============================
+    st.write("---") # Adiciona um separador visual
+    st.markdown("##### Navegar para:")
+
+    # Usamos colunas para organizar os botões
+    col_nav1, col_nav2, col_nav3 = st.columns(3)
+
+    with col_nav1:
+        st.button(
+            "🏠 Início", 
+            on_click=change_page_local, 
+            args=['Início'], 
+            use_container_width=True # Faz o botão ocupar a coluna
+        )
+    
+    with col_nav2:
+        st.button(
+            "📊 Dashboards", 
+            on_click=change_page_local, 
+            args=['Dashboards'], 
+            use_container_width=True
+        )
+
+    with col_nav3:
+        st.button(
+            "📬 Contato", 
+            on_click=change_page_local, 
+            args=['Contato'], 
+            use_container_width=True
+        )
+
 
 # Esta parte é para testar o arquivo isoladamente
 if __name__ == "__main__":
