@@ -38,39 +38,31 @@ def run():
 
     with col1:
         with st.container(border=True):
-            st.markdown("### Análise de Vendas (Power BI)")
-            st.write(
-                "Dashboard focado em KPIs de vendas, performance de produtos e análise regional. "
-                "Criado com Power BI."
-            )
+            st.markdown("### Análise de Dados Logística (Power BI)")
             
             st.markdown(
                 '<span class="project-tag">Power BI</span>'
-                '<span class="project-tag">Vendas</span>'
+                '<span class="project-tag">Logística</span>'
                 '<span class="project-tag">KPIs</span>',
                 unsafe_allow_html=True
             )
             st.write("") 
             
-            st.link_button("Ver Dashboard Interativo", "#") 
+            st.link_button("Ver Dashboard Interativo", "https://drive.google.com/file/d/1anZoPwS8kuvP294ZHI7Phcep6ENmJ-Dn/view?usp=drive_link") 
 
     with col2:
         with st.container(border=True):
-            st.markdown("### Dashboard de RH (Tableau)")
-            st.write(
-                "Análise de métricas de RH, incluindo headcount, diversidade e taxas de turnover. "
-                "Criado com Tableau."
-            )
+            st.markdown("### Dashboard de RH (Power BI)")
             
             st.markdown(
-                '<span class="project-tag">Tableau</span>'
+                '<span class="project-tag">Power BI</span>'
                 '<span class="project-tag">RH</span>'
-                '<span class="project-tag">Headcount</span>',
+                '<span class="project-tag">KPIs</span>',
                 unsafe_allow_html=True
             )
             st.write("") 
             
-            st.link_button("Ver Dashboard Interativo", "#")
+            st.link_button("Ver Dashboard Interativo", "https://drive.google.com/file/d/1wSZraDomgOW8FTuRmEJVXsaeBQdQEFsC/view?usp=drive_link")
 
     st.write("---") 
 
@@ -79,23 +71,31 @@ def run():
     
     with col3:
         with st.container(border=True):
-            st.markdown("### Dashboard Financeiro (Excel)")
-            st.write(
-                "Análise de DRE, fluxo de caixa e principais indicadores financeiros da companhia."
-            )
-            
+            st.markdown("### Dashboard Comercial - Performance de venda (Power BI)")
             st.markdown(
-                '<span class="project-tag">Excel</span>'
-                '<span class="project-tag">Financeiro</span>'
-                '<span class="project-tag">DRE</span>',
+                '<span class="project-tag">Power BI</span>'
+                '<span class="project-tag">Vendas</span>'
+                '<span class="project-tag">Comercial</span>',
                 unsafe_allow_html=True
             )
             st.write("") 
             
-            st.link_button("Ver Relatório", "#") 
+            st.link_button("Ver Relatório", "https://drive.google.com/file/d/1Ec3yLiNdx957Jo2sgHhX46xlxeRwDO7o/view?usp=drive_link") 
 
     with col4:
-        pass 
+            with st.container(border=True):
+                st.markdown("### Dashboard Financeiro (Power BI)")
+                st.markdown(
+                    '<span class="project-tag">Power BI</span>'
+                    '<span class="project-tag">Financeiro</span>'
+                    '<span class="project-tag">DRE</span>',
+                    unsafe_allow_html=True
+                )
+                st.write("") 
+                
+                st.link_button("Ver Relatório", "https://drive.google.com/file/d/1t-3JqUSwYg_Tzo1NOiEM00HsU0QGYvgY/view?usp=drive_link") 	
+
+    # O bloco "with col5:" foi removido pois 'col5' não estava definida.
 
     # ===============================
     # BOTÕES DE NAVEGAÇÃO DE PÁGINA (NOVO)
@@ -133,4 +133,11 @@ def run():
 
 # Esta parte é para testar o arquivo isoladamente
 if __name__ == "__main__":
+    # Para testar, precisamos simular o st.session_state se ele não existir
+    if 'page' not in st.session_state:
+        st.session_state.page = 'Dashboards' # Valor inicial de exemplo
+    
     run()
+    
+    # Exibe a página atual (para fins de teste)
+    st.write(f"Página atual no session_state: {st.session_state.page}")
