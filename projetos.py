@@ -31,7 +31,9 @@ def run():
     st.write("Aqui estão alguns projetos que demonstram minhas habilidades em análise, modelagem e visualização de dados.")
     st.write("---")
 
-    col1, col2 = st.columns(2)
+    # --- LINHA 1: Destaque para o Portfólio ---
+    # Damos à primeira coluna (col1) o dobro do peso da segunda (col2)
+    col1, col2 = st.columns([2, 1])
     
     # --- Projeto 1: Portfólio (VERSÃO CORRIGIDA) ---
     with col1:
@@ -63,7 +65,8 @@ def run():
                 """)
 
     # --- Projeto 1: Unicórnios ---
-    with col1:
+    # Este projeto fica na segunda coluna (col2), que é mais estreita
+    with col2:
         with st.container(border=True):
             st.markdown("### 🦄 Decifrando os Unicórnios")
             # DESCRIÇÃO CORRIGIDA
@@ -90,8 +93,12 @@ def run():
                 - **Insights:** A maior concentração de unicórnios está nos **Estados Unidos** (51.4%) e na **China** (10.1%). Os setores com maior número são **Fintech**, **Internet software & services** e **E-commerce & direct-to-consumer**.
                 """)
 
+    # --- LINHA 2: Projetos seguintes ---
+    # Redefinimos as colunas para terem tamanhos iguais (padrão)
+    col3, col4 = st.columns(2)
+
     # --- Projeto 2: Desempenho de Alunos ---
-    with col2:
+    with col3:
         with st.container(border=True):
             # TÍTULO E DESCRIÇÃO CORRIGIDOS
             st.markdown("### 📚 Fatores de Desempenho Escolar")
@@ -119,8 +126,7 @@ def run():
                 """)
 
     # --- Projeto 3: Mercado Financeiro ---
-    # CORREÇÃO DE LAYOUT: Usando col1 (em vez do col3 inexistente)
-    with col1:
+    with col4:
         with st.container(border=True):
             # TÍTULO E DESCRIÇÃO CORRIGIDOS
             st.markdown("### 📈 Mercado Financeiro - Séries Temporais (MGLU3)")
@@ -146,9 +152,12 @@ def run():
                 - **Insights:** A análise das Médias Móveis (5 e 30 dias) permite identificar a tendência principal e a volatilidade do preço da ação. O Boxplot Mensal pode revelar períodos de maior ou menor volatilidade.
                 """)
 
+    # --- LINHA 3: Projetos finais ---
+    # Redefinimos as colunas novamente para tamanhos iguais
+    col5, col6 = st.columns(2)
+
     # --- Projeto 4: Mercado de Games ---
-    # CORREÇÃO DE LAYOUT: Usando col2 (em vez do col4 inexistente)
-    with col2:
+    with col5:
         with st.container(border=True):
             # TÍTULO E DESCRIÇÃO CORRIGIDOS
             st.markdown("### 🎮 Análise do Mercado de Games (PS4)")
@@ -175,8 +184,7 @@ def run():
                 """)
 
     # --- Projeto 5: RH ---
-    # CORREÇÃO DE LAYOUT: Usando col1 (em vez do col5 inexistente)
-    with col1:
+    with col6:
         with st.container(border=True):
             # TÍTULO E DESCRIÇÃO CORRIGIDOS
             st.markdown("### 🧑‍💼 Tempo de Experiência vs Salário (RH)")
