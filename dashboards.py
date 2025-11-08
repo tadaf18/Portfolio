@@ -33,12 +33,25 @@ def run():
     st.write("---")
 
     # Caminhos dos arquivos locais (.pbix)
+    # Certifique-se que estes arquivos existem no mesmo diretório do script ou no caminho especificado
     arquivos = {
         "Logística": "Análise de Dados de Logística.pbix",
         "RH": "Análise de Dados de RH.pbix",
         "Comercial": "Dashboard Comercial - Performance de venda.pbix",
-        "Financeiro": "Dashboard de Análise Financeira.pbix"
+        "Financeiro": "Dashboard de Análise Financeira.pbix",
+        "Financeiro 2": "Dashboard Financeira.pbix"
     }
+    
+    # Caminhos das imagens
+    # Certifique-se que a pasta "imagens" existe no mesmo diretório do script
+    imagens = {
+        "Logística": "imagens/logistica.png",
+        "RH": "imagens/rh.png",
+        "Comercial": "imagens/comercial.png",
+        "Financeiro": "imagens/financeiro.png",
+        "Financeiro 2": "imagens/financeiro2.png"
+    }
+
 
     # ===============================
     # PRIMEIRA LINHA DE DASHBOARDS
@@ -56,17 +69,18 @@ def run():
                 unsafe_allow_html=True
             )
 
-            img_path = "imagens/logistica.png"
+            img_path = imagens["Logística"]
             if os.path.exists(img_path):
                 st.image(img_path, use_container_width=True)
             else:
-                st.warning("⚠️ Imagem do dashboard de Logística não encontrada.")
+                st.warning(f"⚠️ Imagem não encontrada: {img_path}")
 
-            if os.path.exists(arquivos["Logística"]):
-                with open(arquivos["Logística"], "rb") as f:
-                    st.download_button("🔽 Baixar Arquivo (.pbix)", f, file_name=Path(arquivos["Logística"]).name)
+            file_path = arquivos["Logística"]
+            if os.path.exists(file_path):
+                with open(file_path, "rb") as f:
+                    st.download_button("🔽 Baixar Arquivo (.pbix)", f, file_name=Path(file_path).name)
             else:
-                st.error("Arquivo Power BI não encontrado.")
+                st.error(f"Arquivo Power BI não encontrado: {file_path}")
 
     # ----- Dashboard RH -----
     with col2:
@@ -79,17 +93,18 @@ def run():
                 unsafe_allow_html=True
             )
 
-            img_path = "imagens/rh.png"
+            img_path = imagens["RH"]
             if os.path.exists(img_path):
                 st.image(img_path, use_container_width=True)
             else:
-                st.warning("⚠️ Imagem do dashboard de RH não encontrada.")
+                st.warning(f"⚠️ Imagem não encontrada: {img_path}")
 
-            if os.path.exists(arquivos["RH"]):
-                with open(arquivos["RH"], "rb") as f:
-                    st.download_button("🔽 Baixar Arquivo (.pbix)", f, file_name=Path(arquivos["RH"]).name)
+            file_path = arquivos["RH"]
+            if os.path.exists(file_path):
+                with open(file_path, "rb") as f:
+                    st.download_button("🔽 Baixar Arquivo (.pbix)", f, file_name=Path(file_path).name)
             else:
-                st.error("Arquivo Power BI não encontrado.")
+                st.error(f"Arquivo Power BI não encontrado: {file_path}")
 
     st.write("---")
 
@@ -109,17 +124,18 @@ def run():
                 unsafe_allow_html=True
             )
 
-            img_path = "imagens/comercial.png"
+            img_path = imagens["Comercial"]
             if os.path.exists(img_path):
                 st.image(img_path, use_container_width=True)
             else:
-                st.warning("⚠️ Imagem do dashboard Comercial não encontrada.")
+                st.warning(f"⚠️ Imagem não encontrada: {img_path}")
 
-            if os.path.exists(arquivos["Comercial"]):
-                with open(arquivos["Comercial"], "rb") as f:
-                    st.download_button("🔽 Baixar Arquivo (.pbix)", f, file_name=Path(arquivos["Comercial"]).name)
+            file_path = arquivos["Comercial"]
+            if os.path.exists(file_path):
+                with open(file_path, "rb") as f:
+                    st.download_button("🔽 Baixar Arquivo (.pbix)", f, file_name=Path(file_path).name)
             else:
-                st.error("Arquivo Power BI não encontrado.")
+                st.error(f"Arquivo Power BI não encontrado: {file_path}")
 
     # ----- Dashboard Financeiro -----
     with col4:
@@ -132,17 +148,59 @@ def run():
                 unsafe_allow_html=True
             )
 
-            img_path = "imagens/financeiro.png"
+            img_path = imagens["Financeiro"]
             if os.path.exists(img_path):
                 st.image(img_path, use_container_width=True)
             else:
-                st.warning("⚠️ Imagem do dashboard Financeiro não encontrada.")
+                st.warning(f"⚠️ Imagem não encontrada: {img_path}")
 
-            if os.path.exists(arquivos["Financeiro"]):
-                with open(arquivos["Financeiro"], "rb") as f:
-                    st.download_button("🔽 Baixar Arquivo (.pbix)", f, file_name=Path(arquivos["Financeiro"]).name)
+            file_path = arquivos["Financeiro"]
+            if os.path.exists(file_path):
+                with open(file_path, "rb") as f:
+                    st.download_button("🔽 Baixar Arquivo (.pbix)", f, file_name=Path(file_path).name)
             else:
-                st.error("Arquivo Power BI não encontrado.")
+                st.error(f"Arquivo Power BI não encontrado: {file_path}")
+    
+    st.write("---") # <--- CORREÇÃO 1: Adicionada linha de separação
+
+    # ===============================
+    # TERCEIRA LINHA DE DASHBOARDS 
+    # ===============================
+    
+    # <--- CORREÇÃO 1: Adicionada nova linha de colunas ---
+    # O Dashboard "Financeiro 2" estava sendo colocado na col4, junto com o "Financeiro 1".
+    # Criei uma nova linha (col5, col6) para ele.
+    col5, col6 = st.columns(2)
+
+    # ----- Dashboard Financeiro 2 -----
+    with col5: # <--- CORREÇÃO 1: Movido para col5
+        with st.container(border=True):
+            st.markdown("### 💰 Dashboard Financeiro 2 (Power BI)")
+            st.markdown(
+                '<span class="project-tag">Power BI</span>'
+                '<span class="project-tag">Financeiro</span>'
+                '<span class="project-tag">DRE</span>',
+                unsafe_allow_html=True
+            )
+
+            img_path = imagens["Financeiro 2"]
+            if os.path.exists(img_path):
+                st.image(img_path, use_container_width=True)
+            else:
+                # <--- CORREÇÃO 3: Mensagem de aviso ---
+                # A mensagem de aviso da imagem estava incorreta.
+                st.warning(f"⚠️ Imagem não encontrada: {img_path}") # Mensagem corrigida
+
+            # <--- CORREÇÃO 2: Caminho do arquivo ---
+            # O código estava verificando e abrindo `arquivos["Financeiro"]` em vez de `arquivos["Financeiro 2"]`.
+            file_path = arquivos["Financeiro 2"] # Corrigido
+            if os.path.exists(file_path):
+                with open(file_path, "rb") as f: # Corrigido
+                    st.download_button("🔽 Baixar Arquivo (.pbix)", f, file_name=Path(file_path).name)
+            else:
+                st.error(f"Arquivo Power BI não encontrado: {file_path}")
+                
+    # A coluna col6 ficará vazia, o que é normal.
 
     st.write("---")
 
