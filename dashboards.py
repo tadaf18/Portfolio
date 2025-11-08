@@ -39,7 +39,7 @@ def run():
         "RH": "Análise de Dados de RH.pbix",
         "Comercial": "Dashboard Comercial - Performance de venda.pbix",
         "Financeiro": "Dashboard de Análise Financeira.pbix",
-        "Financeiro 2": "Dashboard Financeira.pbix"
+        "Financeiro 2": "Dashboard Financeiro.pbix" # <--- CORREÇÃO: Alterado de "Financeira" para "Financeiro"
     }
     
     # Caminhos das imagens
