@@ -31,9 +31,9 @@ def run():
     st.write("Aqui estão alguns projetos que demonstram minhas habilidades em análise, modelagem e visualização de dados.")
     st.write("---")
 
-    # --- LINHA 1: Destaque para o Portfólio ---
-    # Damos à primeira coluna (col1) o dobro do peso da segunda (col2)
-    col1, col2 = st.columns([2, 1])
+    # --- Definir colunas para o layout ---
+    # Definimos 2 colunas de tamanhos iguais
+    col1, col2 = st.columns(2)
     
     # --- Projeto 1: Portfólio (VERSÃO CORRIGIDA) ---
     with col1:
@@ -93,12 +93,9 @@ def run():
                 - **Insights:** A maior concentração de unicórnios está nos **Estados Unidos** (51.4%) e na **China** (10.1%). Os setores com maior número são **Fintech**, **Internet software & services** e **E-commerce & direct-to-consumer**.
                 """)
 
-    # --- LINHA 2: Projetos seguintes ---
-    # Redefinimos as colunas para terem tamanhos iguais (padrão)
-    col3, col4 = st.columns(2)
-
     # --- Projeto 2: Desempenho de Alunos ---
-    with col3:
+    # Este vai para a col1
+    with col1:
         with st.container(border=True):
             # TÍTULO E DESCRIÇÃO CORRIGIDOS
             st.markdown("### 📚 Fatores de Desempenho Escolar")
@@ -126,7 +123,8 @@ def run():
                 """)
 
     # --- Projeto 3: Mercado Financeiro ---
-    with col4:
+    # Este vai para a col2
+    with col2:
         with st.container(border=True):
             # TÍTULO E DESCRIÇÃO CORRIGIDOS
             st.markdown("### 📈 Mercado Financeiro - Séries Temporais (MGLU3)")
@@ -152,12 +150,9 @@ def run():
                 - **Insights:** A análise das Médias Móveis (5 e 30 dias) permite identificar a tendência principal e a volatilidade do preço da ação. O Boxplot Mensal pode revelar períodos de maior ou menor volatilidade.
                 """)
 
-    # --- LINHA 3: Projetos finais ---
-    # Redefinimos as colunas novamente para tamanhos iguais
-    col5, col6 = st.columns(2)
-
     # --- Projeto 4: Mercado de Games ---
-    with col5:
+    # Este vai para a col1
+    with col1:
         with st.container(border=True):
             # TÍTULO E DESCRIÇÃO CORRIGIDOS
             st.markdown("### 🎮 Análise do Mercado de Games (PS4)")
@@ -184,7 +179,8 @@ def run():
                 """)
 
     # --- Projeto 5: RH ---
-    with col6:
+    # Este vai para a col2
+    with col2:
         with st.container(border=True):
             # TÍTULO E DESCRIÇÃO CORRIGIDOS
             st.markdown("### 🧑‍💼 Tempo de Experiência vs Salário (RH)")
