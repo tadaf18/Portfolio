@@ -32,6 +32,35 @@ def run():
     st.write("---")
 
     col1, col2 = st.columns(2)
+    
+    # --- Projeto 1: Portfólio (VERSÃO CORRIGIDA) ---
+    with col1:
+        with st.container(border=True):
+            # TÍTULO MELHORADO
+            st.markdown("### 🧑‍💼 Portfólio Interativo de Data Science (Streamlit)")
+            
+            # DESCRIÇÃO MELHORADA
+            st.write("Desenvolvimento desta aplicação web (front-end e back-end em Python puro) usando Streamlit para exibir e catalogar de forma interativa os projetos de análise, modelos e dashboards.")
+            
+            # TAGS CORRIGIDAS (Focadas no projeto do app)
+            st.markdown(
+                '<span class="project-tag">Python</span>'
+                '<span class="project-tag">Streamlit</span>'
+                '<span class="project-tag">Web App</span>'
+                '<span class="project-tag">CSS</span>'
+                '<span class="project-tag">UI/UX</span>',
+                unsafe_allow_html=True
+            )
+            st.write("") # Espaçamento
+            st.link_button("Ver Código no GitHub", "https://github.com/tadaf18/Portfolio") 
+
+            # EXPANDER (Já preenchido na sugestão anterior)
+            with st.expander("Ver detalhes do desenvolvimento"):
+                st.markdown("""
+                - **Problema:** Como organizar e apresentar de forma clara, interativa e acessível um conjunto diversificado de projetos de Data Science e Dashboards para recrutadores e colegas.
+                - **Método:** Utilização da biblioteca **Streamlit** para construir uma aplicação web a partir de scripts Python. Uso de `st.session_state` para navegação entre páginas e aplicação de **CSS customizado** para identidade visual.
+                - **Insights:** Streamlit é uma ferramenta poderosa e rápida para prototipação e implementação de portfolios, permitindo a exibição de resultados de análise em um ambiente web funcional sem a necessidade de um desenvolvimento front-end complexo.
+                """)
 
     # --- Projeto 1: Unicórnios ---
     with col1:
@@ -168,10 +197,11 @@ def run():
             # EXPANDER CORRIGIDO
             with st.expander("Ver detalhes da análise"):
                 st.markdown("""
-                - **Problema:** Analisar a correlação entre Anos de Experiência e Salário e construir um modelo preditivo que permita estimar a remuneração com base na experiência.
+                - **Problema:** Analisar a correlação entre Anos de Experiência e Salário e construir um modelo preditivo que permita estimar η remuneração com base na experiência.
                 - **Método:** Análise descritiva e visualização da distribuição das variáveis. Aplicação de um modelo de **Regressão Linear Simples** usando Scikit-learn para modelar a relação.
                 - **Insights:** O modelo demonstra uma **forte correlação linear positiva** entre o tempo de experiência e o salário, podendo ser usado para prever salários com base na experiência.
                 """)
+
     
     # ===============================
     # BOTÕES DE NAVEGAÇÃO DE PÁGINA
