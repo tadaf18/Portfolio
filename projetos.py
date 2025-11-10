@@ -32,11 +32,15 @@ def run():
     st.write("---")
 
     # --- Definir colunas para o layout ---
-    # Definimos 2 colunas de tamanhos iguais
     col1, col2 = st.columns(2)
     
+    # --- CORREÇÃO ---
+    # Removida a altura fixa (FIXED_HEIGHT = 480)
+    # ----------------
+
     # --- Projeto 1: Portfólio (VERSÃO CORRIGIDA) ---
     with col1:
+        # --- CORREÇÃO: Removido 'height=FIXED_HEIGHT' ---
         with st.container(border=True):
             # TÍTULO MELHORADO
             st.markdown("### 🧑‍💼 Portfólio Interativo de Data Science (Streamlit)")
@@ -56,7 +60,7 @@ def run():
             st.write("") # Espaçamento
             st.link_button("Ver Código no GitHub", "https://github.com/tadaf18/Portfolio") 
 
-            # EXPANDER (Já preenchido na sugestão anterior)
+            # EXPANDER
             with st.expander("Ver detalhes do desenvolvimento"):
                 st.markdown("""
                 - **Problema:** Como organizar e apresentar de forma clara, interativa e acessível um conjunto diversificado de projetos de Data Science e Dashboards para recrutadores e colegas.
@@ -64,9 +68,9 @@ def run():
                 - **Insights:** Streamlit é uma ferramenta poderosa e rápida para prototipação e implementação de portfolios, permitindo a exibição de resultados de análise em um ambiente web funcional sem a necessidade de um desenvolvimento front-end complexo.
                 """)
 
-    # --- Projeto 1: Unicórnios ---
-    # Este projeto fica na segunda coluna (col2), que é mais estreita
+    # --- Projeto 2: Unicórnios ---
     with col2:
+        # --- CORREÇÃO: Removido 'height=FIXED_HEIGHT' ---
         with st.container(border=True):
             st.markdown("### 🦄 Decifrando os Unicórnios")
             # DESCRIÇÃO CORRIGIDA
@@ -93,9 +97,9 @@ def run():
                 - **Insights:** A maior concentração de unicórnios está nos **Estados Unidos** (51.4%) e na **China** (10.1%). Os setores com maior número são **Fintech**, **Internet software & services** e **E-commerce & direct-to-consumer**.
                 """)
 
-    # --- Projeto 2: Desempenho de Alunos ---
-    # Este vai para a col1
+    # --- Projeto 3: Desempenho de Alunos ---
     with col1:
+        # --- CORREÇÃO: Removido 'height=FIXED_HEIGHT' ---
         with st.container(border=True):
             # TÍTULO E DESCRIÇÃO CORRIGIDOS
             st.markdown("### 📚 Fatores de Desempenho Escolar")
@@ -122,9 +126,9 @@ def run():
                 - **Insights:** O modelo de regressão mostrou que "**concluir o curso de preparação para o teste**" e "**status de alimentação (lunch)**" foram os preditores mais significativos, superando o nível educacional dos pais.
                 """)
 
-    # --- Projeto 3: Mercado Financeiro ---
-    # Este vai para a col2
+    # --- Projeto 4: Mercado Financeiro ---
     with col2:
+        # --- CORREÇÃO: Removido 'height=FIXED_HEIGHT' ---
         with st.container(border=True):
             # TÍTULO E DESCRIÇÃO CORRIGIDOS
             st.markdown("### 📈 Mercado Financeiro - Séries Temporais (MGLU3)")
@@ -150,9 +154,9 @@ def run():
                 - **Insights:** A análise das Médias Móveis (5 e 30 dias) permite identificar a tendência principal e a volatilidade do preço da ação. O Boxplot Mensal pode revelar períodos de maior ou menor volatilidade.
                 """)
 
-    # --- Projeto 4: Mercado de Games ---
-    # Este vai para a col1
+    # --- Projeto 5: Mercado de Games ---
     with col1:
+        # --- CORREÇÃO: Removido 'height=FIXED_HEIGHT' ---
         with st.container(border=True):
             # TÍTULO E DESCRIÇÃO CORRIGIDOS
             st.markdown("### 🎮 Análise do Mercado de Games (PS4)")
@@ -178,9 +182,9 @@ def run():
                 - **Insights:** O pico de vendas global para PS4 ocorreu em **2016**. A **Europa** e a **América do Norte** são os mercados mais relevantes. Os gêneros **Action** e **Shooter** estão entre os mais vendidos.
                 """)
 
-    # --- Projeto 5: RH ---
-    # Este vai para a col2
+    # --- Projeto 6: RH ---
     with col2:
+        # --- CORREÇÃO: Removido 'height=FIXED_HEIGHT' ---
         with st.container(border=True):
             # TÍTULO E DESCRIÇÃO CORRIGIDOS
             st.markdown("### 🧑‍💼 Tempo de Experiência vs Salário (RH)")
@@ -196,12 +200,14 @@ def run():
                 unsafe_allow_html=True
             )
             st.write("") # Espaçamento
-            st.link_button("Ver Projeto no GitHub", "https://github.com/tadaf18/projeto_mercado_de_games") # Mantido link original
+            
+            # Link corrigido (apontando para o perfil, como antes)
+            st.link_button("Ver Perfil no GitHub", "https://github.com/tadaf18") 
 
             # EXPANDER CORRIGIDO
             with st.expander("Ver detalhes da análise"):
                 st.markdown("""
-                - **Problema:** Analisar a correlação entre Anos de Experiência e Salário e construir um modelo preditivo que permita estimar η remuneração com base na experiência.
+                - **Problema:** Analisar a correlação entre Anos de Experiência e Salário e construir um modelo preditivo que permita estimar a remuneração com base na experiência.
                 - **Método:** Análise descritiva e visualização da distribuição das variáveis. Aplicação de um modelo de **Regressão Linear Simples** usando Scikit-learn para modelar a relação.
                 - **Insights:** O modelo demonstra uma **forte correlação linear positiva** entre o tempo de experiência e o salário, podendo ser usado para prever salários com base na experiência.
                 """)
@@ -213,8 +219,9 @@ def run():
     st.write("---") # Adiciona um separador visual
     st.markdown("##### Navegar para:")
 
-    # Usamos colunas para organizar os botões
-    col_nav1, col_nav2, col_nav3 = st.columns(3)
+    # --- ATUALIZAÇÃO AQUI ---
+    # Usamos 4 colunas para organizar os botões, incluindo "Certificados"
+    col_nav1, col_nav2, col_nav3, col_nav4 = st.columns(4)
 
     with col_nav1:
         st.button(
@@ -234,11 +241,20 @@ def run():
 
     with col_nav3:
         st.button(
+            "🎓 Certificados", 
+            on_click=change_page_local, 
+            args=['Certificados'], 
+            use_container_width=True
+        )
+
+    with col_nav4:
+        st.button(
             "📬 Contato", 
             on_click=change_page_local, 
             args=['Contato'], 
             use_container_width=True
         )
+    # --- FIM DA ATUALIZAÇÃO ---
 
 
 # Esta parte é para testar o arquivo isoladamente
