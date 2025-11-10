@@ -208,7 +208,10 @@ def run():
     # BOTÕES DE NAVEGAÇÃO
     # ===============================
     st.markdown("##### Navegar para:")
-    col_nav1, col_nav2, col_nav3 = st.columns(3)
+
+    # --- ATUALIZAÇÃO AQUI ---
+    # Convertido de 3 para 4 colunas, alinhado com as outras páginas
+    col_nav1, col_nav2, col_nav3, col_nav4 = st.columns(4)
 
     with col_nav1:
         st.button(
@@ -225,14 +228,23 @@ def run():
             args=['Projetos'],
             use_container_width=True
         )
-
+    
     with col_nav3:
+        st.button(
+            "🎓 Certificados", 
+            on_click=change_page_local, 
+            args=['Certificados'], 
+            use_container_width=True
+        )
+
+    with col_nav4:
         st.button(
             "📬 Contato",
             on_click=change_page_local,
             args=['Contato'],
             use_container_width=True
         )
+    # --- FIM DA ATUALIZAÇÃO ---
 
 
 # ===============================
