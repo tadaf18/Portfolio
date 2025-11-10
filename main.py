@@ -51,7 +51,7 @@ st.markdown("""
             font-size: 1em;
             font-weight: 500;
             transition: all 0.3s ease-in-out;
-            width: 100%; /* Adicionado para os botões terem o mesmo tamanho */
+            width: 100%; /* Garante que os botões tenham o mesmo tamanho */
         }
 
         .stButton > button:hover {
@@ -84,12 +84,15 @@ def make_rounded(image):
 # FUNÇÃO PARA EXIBIR PÁGINAS
 # ===============================
 def show_pages(page_name):
+    # --- ATUALIZAÇÃO AQUI ---
     modules = {
         'Início': 'inicio',
         'Projetos': 'projetos',
         'Dashboards': 'dashboards',
+        'Certificados': 'certificados', # <-- PÁGINA ADICIONADA
         'Contato': 'contato'
     }
+    # -------------------------
 
     module_name = modules.get(page_name)
     if module_name:
@@ -98,7 +101,6 @@ def show_pages(page_name):
             module = importlib.import_module(module_name)
             
             # Recarrega o módulo para garantir que mudanças sejam vistas
-            # (útil durante o desenvolvimento)
             importlib.reload(module) 
             
             if hasattr(module, 'run'):
@@ -125,12 +127,14 @@ st.sidebar.image(
 st.sidebar.title("Navegação")
 
 # 2. O st.radio agora usa 'key="page"' para ler e escrever no session_state
+# --- ATUALIZAÇÃO AQUI ---
 st.sidebar.radio(
     "Navegação", # O label é necessário, mas será escondido
-    ['Início', 'Projetos', 'Dashboards', 'Contato'],
+    ['Início', 'Projetos', 'Dashboards', 'Certificados', 'Contato'], # <-- PÁGINA ADICIONADA
     key='page', # Esta é a "variável" no session_state
     label_visibility='collapsed' # Esconde o label "Navegação"
 )
+# -------------------------
 
 # ===============================
 # FUNÇÃO PARA MUDAR DE PÁGINA (USADA PELOS BOTÕES)
@@ -146,14 +150,17 @@ def change_page(page_name):
 if st.session_state.page == "Início":
     # Carrega imagem do perfil
     url = 'https://media.licdn.com/dms/image/v2/D4D03AQEI5LWxkyG7YQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1731789177315?e=1763596800&v=beta&t=O2JBLPJ30d0qX45ST4dZ-eonWs85Q25y2ENX3HmMn7g'
-    response = requests.get(url)
-    image = Image.open(BytesIO(response.content))
-    rounded_image = make_rounded(image)
+    try:
+        response = requests.get(url)
+        image = Image.open(BytesIO(response.content))
+        rounded_image = make_rounded(image)
 
-    # Exibe imagem centralizada
-    col1, col2, col3 = st.columns([1, 2, 1])
-    with col2:
-        st.image(rounded_image, use_column_width=False, width=180)
+        # Exibe imagem centralizada
+        col1, col2, col3 = st.columns([1, 2, 1])
+        with col2:
+            st.image(rounded_image, use_column_width=False, width=180)
+    except Exception as e:
+        st.error(f"Não foi possível carregar a imagem de perfil: {e}")
 
     # Título e descrição
     st.markdown('<h1 class="main-title">Portfólio de Ciência de Dados</h1>', unsafe_allow_html=True)
@@ -173,15 +180,18 @@ if st.session_state.page == "Início":
 
     st.write("---")
 
-    # 4. Botões de ação MODIFICADOS
-    # Agora usam st.button e a função on_click para mudar o st.session_state.page
-    col_a, col_b, col_c = st.columns(3)
+    # 4. Botões de ação
+    # --- ATUALIZAÇÃO AQUI (4 Colunas) ---
+    col_a, col_b, col_c, col_d = st.columns(4)
     with col_a:
-        st.button("💼 Ver Projetos", on_click=change_page, args=['Projetos'])
+        st.button("💼 Ver Projetos", on_click=change_page, args=['Projetos'], use_container_width=True)
     with col_b:
-        st.button("📊 Dashboards", on_click=change_page, args=['Dashboards'])
+        st.button("📊 Dashboards", on_click=change_page, args=['Dashboards'], use_container_width=True)
     with col_c:
-        st.button("📬 Contato", on_click=change_page, args=['Contato'])
+        st.button("🎓 Certificados", on_click=change_page, args=['Certificados'], use_container_width=True) # <-- BOTÃO ADICIONADO
+    with col_d:
+        st.button("📬 Contato", on_click=change_page, args=['Contato'], use_container_width=True)
+    # ----------------------------------
 
     # ===============================
     # CURRÍCULO - BOTÃO PARA DOWNLOAD LOCAL
@@ -200,6 +210,8 @@ if st.session_state.page == "Início":
         )
     except FileNotFoundError:
         st.warning("⚠️ O arquivo 'curriculo.pdf' não foi encontrado na pasta do projeto.")
+    except Exception as e:
+        st.error(f"Ocorreu um erro ao tentar carregar o currículo: {e}")
 
 else:
     # 5. Renderiza as outras páginas lendo o valor do session_state
