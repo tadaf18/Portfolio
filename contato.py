@@ -8,7 +8,7 @@ def change_page_local(page_name):
     st.session_state.page = page_name
 
 def run():
-    st.subheader("Contato")
+    st.subheader("📬 Contato")
 
     st.write("Para entrar em contato, por favor, envie um e-mail para: [tarcisio.alves869@gmail.com](mailto:tarcisio.alves869@gmail.com)")
     st.write("Ou me siga nas redes sociais:")
@@ -27,13 +27,14 @@ def run():
 
 
     # ===============================
-    # BOTÕES DE NAVEGAÇÃO DE PÁGINA (NOVO)
+    # BOTÕES DE NAVEGAÇÃO DE PÁGINA
     # ===============================
     st.write("---") # Adiciona um separador visual
     st.markdown("##### Navegar para:")
 
-    # Usamos colunas para organizar os botões
-    col_nav1, col_nav2, col_nav3 = st.columns(3)
+    # --- ATUALIZAÇÃO AQUI ---
+    # Usamos 4 colunas para organizar os botões, incluindo "Certificados"
+    col_nav1, col_nav2, col_nav3, col_nav4 = st.columns(4)
 
     with col_nav1:
         st.button(
@@ -59,6 +60,18 @@ def run():
             use_container_width=True
         )
 
+    with col_nav4:
+        st.button(
+            "🎓 Certificados", 
+            on_click=change_page_local, 
+            args=['Certificados'], 
+            use_container_width=True
+        )
+    # --- FIM DA ATUALIZAÇÃO ---
 
+
+# Esta parte é para testar o arquivo isoladamente
 if __name__ == "__main__":
+    if 'page' not in st.session_state:
+        st.session_state.page = 'Contato'
     run()
